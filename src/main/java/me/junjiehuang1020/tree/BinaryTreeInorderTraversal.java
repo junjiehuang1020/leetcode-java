@@ -1,7 +1,6 @@
 package me.junjiehuang1020.tree;
 
 import me.junjiehuang1020.common.tree.TreeNode;
-import sun.jvm.hotspot.runtime.ResultTypeFinder;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -10,31 +9,32 @@ import java.util.List;
 
 public class BinaryTreeInorderTraversal {
     
-    public static List<Integer> inorderTraversalSolutionOne(TreeNode root) {
+    public static List<Integer> solution1(TreeNode root) {
         
         List<Integer> result = new ArrayList<>();
     
         if (root == null) {
             return result;
         }
-        List<Integer> leftList = inorderTraversalSolutionOne(root.getLeft());
+        List<Integer> leftList = solution1(root.getLeft());
         result.addAll(leftList);
         result.add(root.getVal());
-        List<Integer> rightList = inorderTraversalSolutionOne(root.getRight());
+        List<Integer> rightList = solution1(root.getRight());
         result.addAll(rightList);
     
         return result;
         
     }
     
-    public static List<Integer> inorderTraversalSolutionTwo(TreeNode root) {
+    //递归
+    public static List<Integer> solution2(TreeNode root) {
     
         ArrayList<Integer> result = new ArrayList<>();
         inorder(root, result);
         return result;
     }
     
-    private void inorder(TreeNode root, ArrayList<Integer> result) {
+    private static void inorder(TreeNode root, ArrayList<Integer> result) {
     
         if (root == null) {
             return;
@@ -46,7 +46,9 @@ public class BinaryTreeInorderTraversal {
         
     }
     
-    public static List<Integer> inorderTraversalSolutionThree(TreeNode root) {
+    
+    //迭代
+    public static List<Integer> solution3(TreeNode root) {
     
         List<Integer> result = new ArrayList<>();
     
@@ -74,7 +76,9 @@ public class BinaryTreeInorderTraversal {
         return result;
     }
     
-    public static List<Integer> inorderTraversalSolutionFour(TreeNode root) {
+    
+    //Morris迭代
+    public static List<Integer> solution4(TreeNode root) {
     
         List<Integer> result = new ArrayList<>();
     
@@ -102,6 +106,44 @@ public class BinaryTreeInorderTraversal {
         }
         return result;
     
+    }
+    
+    
+    public static List<Integer> solution5(TreeNode root) {
+        
+        class ColoredTreeNode {
+            
+            Boolean coloerd;
+            
+            TreeNode node;
+    
+            public ColoredTreeNode(Boolean coloerd, TreeNode node) {
+                this.coloerd = coloerd;
+                this.node = node;
+            }
+        }
+        
+        Deque<ColoredTreeNode> stack = new LinkedList<ColoredTreeNode>(){{
+            add(new ColoredTreeNode(false, root));
+        }};
+    
+        List<Integer> result = new ArrayList<>();
+    
+        while (!stack.isEmpty()) {
+            ColoredTreeNode coloredTreeNode = stack.pop();
+            if (coloredTreeNode.node == null) {
+                continue;
+            }
+            if (coloredTreeNode.coloerd == false) {
+                stack.push(new ColoredTreeNode(false, coloredTreeNode.node.getRight()));
+                stack.push(new ColoredTreeNode(true, coloredTreeNode.node));
+                stack.push(new ColoredTreeNode(false, coloredTreeNode.node.getLeft()));
+            } else {
+                System.out.println(coloredTreeNode.node.getVal());
+                result.add(coloredTreeNode.node.getVal());
+            }
+        }
+        return result;
     }
     
     

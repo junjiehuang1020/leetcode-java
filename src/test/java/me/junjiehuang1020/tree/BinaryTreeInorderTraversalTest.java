@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BinaryTreeInorderTraversalTest {
     
     private static TreeNode root;
@@ -35,6 +33,11 @@ class BinaryTreeInorderTraversalTest {
     
     @Test
     void inorderTraversalSolutionFour() {
-        BinaryTreeInorderTraversal.inorderTraversalSolutionFour(root);
+        BinaryTreeInorderTraversal.solution4(root);
+    }
+    
+    @Test
+    void solution5() {
+        BinaryTreeInorderTraversal.solution5(root);
     }
 }
