@@ -134,15 +134,16 @@ public class BinaryTreeInorderTraversal {
             if (coloredTreeNode.node == null) {
                 continue;
             }
-            if (coloredTreeNode.coloerd == false) {
+            if (!coloredTreeNode.coloerd) {
                 stack.push(new ColoredTreeNode(false, coloredTreeNode.node.getRight()));
                 stack.push(new ColoredTreeNode(true, coloredTreeNode.node));
                 stack.push(new ColoredTreeNode(false, coloredTreeNode.node.getLeft()));
             } else {
-                System.out.println(coloredTreeNode.node.getVal());
+                System.out.print(coloredTreeNode.node.getVal() + " ");
                 result.add(coloredTreeNode.node.getVal());
             }
         }
+        System.out.println("");
         return result;
     }
     
