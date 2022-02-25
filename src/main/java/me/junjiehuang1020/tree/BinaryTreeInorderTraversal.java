@@ -90,7 +90,7 @@ public class BinaryTreeInorderTraversal {
             } else {
                 TreeNode predecessor = root.getLeft();
                 // 出错点，这个算法关键在于如何判断前驱点predecessor
-                while (predecessor.getRight() != null && !predecessor.getRight().equals(root)) {
+                while (predecessor.getRight() != null) {
                     predecessor = predecessor.getRight();
                 }
                 if (predecessor.getRight() == null) {
